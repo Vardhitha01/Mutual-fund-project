@@ -1,0 +1,45 @@
+// script.js
+document.getElementById('investmentForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const fundName = document.getElementById('fundName').value;
+  const investmentAmount = parseFloat(document.getElementById('investmentAmount').value);
+  const currentValue = parseFloat(document.getElementById('currentValue').value);
+  const gainLoss = currentValue - investmentAmount;
+
+  fetch('/api/investments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ fundName, investmentAmount, currentValue, gainLoss })
+  })
+  .then(response => response.json())
+  .then(data => {
+    addInvestmentToTable(data);
+    document.getElementById('investmentForm').reset();
+  });
+});
+
+function addInvestmentToTable(investment) {
+  const table = document.getElementById('investmentTable').querySelector('tbody');
+  const row = table.insertRow();
+  row.insertCell(0).textContent = investment.fundName;
+  row.insertCell(1).textContent = investment.investmentAmount.toFixed(2);
+  row.insertCell(2).textContent = investment.currentValue.toFixed(2);
+  row.insertCell(3).textContent = investment.gainLoss.toFixed(2);
+  const deleteCell = row.insertCell(4);
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = 'Delete';
+  deleteButton.addEventListener('click', function () {
+    fetch(`/api/investments/${investment.id}`, { method: 'DELETE' })
+    .then(() => row.remove());
+  });
+  deleteCell.appendChild(deleteButton);
+}
+
+// Fetch initial investments
+fetch('/api/investments')
+.then(response => response.json())
+.then(investments => {
+  investments.forEach(addInvestmentToTable);
+});
