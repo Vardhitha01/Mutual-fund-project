@@ -1,0 +1,8 @@
+// Data/InvestmentContext.cs
+using Microsoft.EntityFrameworkCore;
+
+public class InvestmentContext : DbContext
+{
+    public InvestmentContext(DbContextOptions<InvestmentContext> options) : base(options) { }
+    public DbSet<Investment> Investments { get; set; }
+}
