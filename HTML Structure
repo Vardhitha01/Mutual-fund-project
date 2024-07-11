@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mutual Funds Tracker</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input, button { margin: 5px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 12px; border: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <h1>Mutual Funds Tracker</h1>
+  <form id="investmentForm">
+    <input type="text" id="fundName" placeholder="Fund Name" required>
+    <input type="number" id="investmentAmount" placeholder="Investment Amount" required>
+    <input type="number" id="currentValue" placeholder="Current Value" required>
+    <button type="submit">Add Investment</button>
+  </form>
+  <table id="investmentTable">
+    <thead>
+      <tr>
+        <th>Fund Name</th>
+        <th>Investment Amount</th>
+        <th>Current Value</th>
+        <th>Gain/Loss</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <script src="script.js"></script>
+</body>
+</html>
