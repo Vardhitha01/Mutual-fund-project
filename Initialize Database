@@ -1,0 +1,14 @@
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
+        using (var scope = host.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            var context = services.GetRequiredService<InvestmentContext>();
+            context.Database.EnsureCreated();
+        }
+        host.Run();
+    }
+}
