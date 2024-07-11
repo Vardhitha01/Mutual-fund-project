@@ -1,0 +1,9 @@
+// Models/Investment.cs
+public class Investment
+{
+    public int Id { get; set; }
+    public string FundName { get; set; }
+    public decimal InvestmentAmount { get; set; }
+    public decimal CurrentValue { get; set; }
+    public decimal GainLoss { get; set; }
+}
